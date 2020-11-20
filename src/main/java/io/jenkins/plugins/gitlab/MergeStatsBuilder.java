@@ -100,8 +100,16 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
         GitAPICall apiCall = new GitAPICall(gitToken);
+        HashMap<String, ArrayList<JSONObject>> map = new HashMap<String, ArrayList<JSONObject>>();
         try {
-            projects = apiCall.getProjects();
+            //projects = apiCall.getProjects();
+
+            ArrayList<JSONObject> repos = apiCall.getRepos(gitOrganisation);
+            for (JSONObject repo : repos) {
+                String projectName = (String) repo.get("name");
+                ArrayList<JSONObject> pullReqs = apiCall.getPullRequests(gitOrganisation, projectName);
+                map.put(projectName, pullReqs);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             logErrors(e, listener);
@@ -144,7 +152,7 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
         listener.getLogger().println("End- Team: " + project);
         listener.getLogger().println("End- No of days searched: " + timescale);
 
-        run.addAction(new MergeStatsAction(project, timescale, statsBreakdown));
+        run.addAction(new MergeStatsAction(project, timescale, map));
     }
 
     public void formatURL() {

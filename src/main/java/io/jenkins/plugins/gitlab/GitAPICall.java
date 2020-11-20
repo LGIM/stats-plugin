@@ -35,7 +35,7 @@ public class GitAPICall {
         projects = new ArrayList<>();
         mergeStats = new ArrayList<>();
         numberOfPages = 0;
-        projectsBaseURL = Constants.GITHUB_HOST + PROJECTS_URI;
+        projectsBaseURL = Constants.GITHUB_HOST;
     }
 
     //to run locally if you do not have the correct certificates
@@ -116,6 +116,28 @@ public class GitAPICall {
         return projects;
     }
 
+    public ArrayList<JSONObject> getRepos(String orgName) throws JSONException, IOException {
+        ArrayList<JSONObject> repoList = new ArrayList<JSONObject>();
+
+        JSONArray array = openConnection(new URL(projectsBaseURL+"orgs/" + orgName + "/repos"));
+        for (int index = 0; index <  array.length(); index++) {
+            repoList.add(array.getJSONObject(index));
+        }
+
+        return repoList;
+    }
+
+    public ArrayList<JSONObject> getPullRequests(String orgName, String projectName) throws JSONException, IOException {
+        ArrayList<JSONObject> repoList = new ArrayList<JSONObject>();
+
+        JSONArray array = openConnection(new URL(projectsBaseURL+"repos/" + orgName + "/" + projectName + "/pulls"));
+        for (int index = 0; index <  array.length(); index++) {
+            repoList.add(array.getJSONObject(index));
+        }
+
+        return repoList;
+    }
+
     public JSONArray openConnection(URL url) throws IOException, JSONException {
         //HttpsURLConnection con = (HttpsURLConnection) url.openConnection(proxy);
         HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
@@ -142,6 +164,21 @@ public class GitAPICall {
         for (int j = 0; j < jsonArray.length(); j++) {
             JSONObject jsonObject = jsonArray.getJSONObject(j);
             list.add(jsonObject);
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            GitAPICall call = new GitAPICall("6d128fec2713c8045888a2c4f07d8015eb31ce13");
+            ArrayList<JSONObject> repos = call.getRepos("baby-yodas");
+            for (JSONObject repo: repos) {
+                String project = (String) repo.get("name");
+                System.out.println("Name = " + project);
+                ArrayList<JSONObject> prs = call.getPullRequests("baby-yodas", project);
+                System.out.println("PRs = " + prs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

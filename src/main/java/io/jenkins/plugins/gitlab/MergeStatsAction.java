@@ -38,7 +38,7 @@ public class MergeStatsAction implements RunAction2 {
             noOfClosed = closed.size();
         }
         if (open != null) {
-            noOfOpen = open.size();
+            noOfOpen = statsBreakdown.get("Chewbacca").size();
         }
         total = noOfClosed + noOfOpen + noOfMerged;
     }

@@ -8,17 +8,17 @@ import org.jvnet.hudson.test.JenkinsRule;
 
 public class MergeStatsBuilderTest {
 
-    final String projectURL = "https://github.com/angular/angular.git";
+    final String projectURL = "https://api.github.com/";
     final String iProject = "angular";
     final String days = "5";
-    final String token = "yyeyjeVZUjpP6X3rzfxM";
+    final String token = "6d128fec2713c8045888a2c4f07d8015eb31ce13";
     @Rule
     public JenkinsRule jenkins = new JenkinsRule();
 
     @Test
     public void testBuild() throws Exception {
         FreeStyleProject project = jenkins.createFreeStyleProject();
-        MergeStatsBuilder builder = new MergeStatsBuilder(projectURL, token, days);
+        MergeStatsBuilder builder = new MergeStatsBuilder(projectURL, "baby-yodas", "", token, days);
         builder.setTimescale(days);
         project.getBuildersList().add(builder);
 
@@ -30,7 +30,7 @@ public class MergeStatsBuilderTest {
     public void testBuildTimescale() throws Exception {
 
         FreeStyleProject project = jenkins.createFreeStyleProject();
-        MergeStatsBuilder builder = new MergeStatsBuilder(projectURL, token, days);
+        MergeStatsBuilder builder = new MergeStatsBuilder(projectURL, "baby-yodas", "", token, days);
         builder.setTimescale(days);
         project.getBuildersList().add(builder);
 
