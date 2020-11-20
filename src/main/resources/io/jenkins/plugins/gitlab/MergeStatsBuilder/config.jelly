@@ -3,7 +3,7 @@
     <f:entry title="${%GitURL}" field="gitURL">
         <f:textbox />
     </f:entry>
-    <f:entry title="${%GitOrg}" field="gitOrg">
+    <f:entry title="${%GitOrg}" field="gitOrganisation">
         <f:textbox />
     </f:entry>
     <f:entry title="${%GitTeam}" field="gitTeam">
