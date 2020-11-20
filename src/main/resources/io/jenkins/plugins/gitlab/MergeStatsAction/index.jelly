@@ -87,9 +87,9 @@
         <j:forEach items="${it.open}" var="request">
             <tr>
                 <td><a target="_blank" rel="noopener noreferrer" href='${request.getString("web_url")}'>${request.getString("iid")}</a></td>
-                <td>${request.getJSONObject("author").getString("name")}</td>
+                <td>${request.getJSONObject("user").getString("login")}</td>
                 <td>${request.getJSONObject("author").getString("username")}</td>
-                <td>${request.getJSONObject("assignee").getString("name")}</td>
+                <td>${request.getJSONArray("requested_reviewers").get(0).getString("login")}</td>
                 <td>${request.getJSONObject("assignee").getString("username")}</td>
                 <td>${request.getString("source_branch")}</td>
                 <td>${request.getString("target_branch")}</td>
