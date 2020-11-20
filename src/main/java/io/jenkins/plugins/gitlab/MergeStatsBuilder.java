@@ -30,6 +30,8 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
     String timeStamp;
     HashMap<String, ArrayList<JSONObject>> statsBreakdown;
     private String gitURL;
+    private String gitOrganisation;
+    private String gitTeam;
     private String gitToken;
     private int timescale;
     private String project;
@@ -38,8 +40,10 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
     private ArrayList<JSONObject> mergeStats;
 
     @DataBoundConstructor
-    public MergeStatsBuilder(String gitURL, String gitToken, String timescale) {
+    public MergeStatsBuilder(String gitURL,String gitOrganisation, String gitTeam, String gitToken, String timescale ) {
         this.gitURL = gitURL;
+        this.gitOrganisation = gitOrganisation;
+        this.gitTeam = gitTeam;
         this.gitToken = gitToken;
         setTimescale(timescale);
     }
@@ -73,6 +77,24 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
     @DataBoundSetter
     public void setGitToken(String gitToken) {
         this.gitToken = gitToken;
+    }
+
+    public String getGitOrganisation() {
+        return gitOrganisation;
+    }
+
+    @DataBoundSetter
+    public void setGitOrganisation(String gitOrganisation) {
+        this.gitOrganisation = gitOrganisation;
+    }
+
+    public String getGitTeam() {
+        return gitTeam;
+    }
+
+    @DataBoundSetter
+    public void setGitTeam(String gitTeam) {
+        this.gitTeam = gitTeam;
     }
 
     @Override
@@ -119,7 +141,7 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
         if (mergeStats != null) {
             statsBreakdown = categoriseMergeStats.categorise(mergeStats);
         }
-        listener.getLogger().println("End- Project: " + project);
+        listener.getLogger().println("End- Team: " + project);
         listener.getLogger().println("End- No of days searched: " + timescale);
 
         run.addAction(new MergeStatsAction(project, timescale, statsBreakdown));
