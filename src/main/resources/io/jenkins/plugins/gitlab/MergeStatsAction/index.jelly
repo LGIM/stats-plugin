@@ -1,0 +1,132 @@
+<?jelly escape-by-default='true'?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:l="/lib/layout" xmlns:st="jelly:stapler">
+<l:layout title="Show merge stats">
+    <l:side-panel> 1
+        <st:include page="sidepanel.jelly" it="${it.run}" optional="true" />
+    </l:side-panel>
+<l:main-panel>
+
+    <style type="text/css">
+        table, td, th {
+          border-collapse: collapse;
+          border: 1px solid #404040;
+          padding: 4px;
+        }
+
+
+        tbody tr:nth-child(odd) {
+           background-color:	#D3D3D3;
+        }
+
+        tbody th {
+            background-color: #808080;
+            color: white;
+            text-align: left;
+        }
+    </style>
+
+    <h1>Project: ${it.project}</h1>
+    <h2>No of days searched: ${it.daysSearched}</h2>
+
+    <table>
+    <tr>
+        <th>No of merged</th>
+        <th>No of open</th>
+        <th>No of closed</th>
+        <th>Total</th>
+    </tr>
+        <tr>
+            <td>${it.noOfMerged}</td>
+            <td>${it.noOfOpen}</td>
+            <td>${it.noOfClosed}</td>
+            <td>${it.total}</td>
+        </tr>
+    </table>
+
+    <h4>Merged requests</h4>
+    <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Author </th>
+            <th>Assignee</th>
+            <th>Assignee </th>
+            <th>Source branch</th>
+            <th>Target branch</th>
+            <th>Created</th>
+            <th>Updated</th>
+        </tr>
+        <j:forEach items="${it.merged}" var="request">
+            <tr>
+                <td><a target="_blank" rel="noopener noreferrer" href='${request.getString("web_url")}'>${request.getString("iid")}</a></td>
+                <td>${request.getJSONObject("author").getString("name")}</td>
+                <td>${request.getJSONObject("author").getString("username")}</td>
+                <td>${request.getJSONObject("assignee").getString("name")}</td>
+                <td>${request.getJSONObject("assignee").getString("username")}</td>
+                <td>${request.getString("source_branch")}</td>
+                <td>${request.getString("target_branch")}</td>
+                <td>${request.getString("created_at")}</td>
+                <td>${request.getString("updated_at")}</td>
+            </tr>
+        </j:forEach>
+    </table>
+
+    <h4>Open requests</h4>
+    <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Author </th>
+            <th>Assignee</th>
+            <th>Assignee </th>
+            <th>Source branch</th>
+            <th>Target branch</th>
+            <th>Created</th>
+            <th>Updated</th>
+        </tr>
+        <j:forEach items="${it.open}" var="request">
+            <tr>
+                <td><a target="_blank" rel="noopener noreferrer" href='${request.getString("web_url")}'>${request.getString("iid")}</a></td>
+                <td>${request.getJSONObject("author").getString("name")}</td>
+                <td>${request.getJSONObject("author").getString("username")}</td>
+                <td>${request.getJSONObject("assignee").getString("name")}</td>
+                <td>${request.getJSONObject("assignee").getString("username")}</td>
+                <td>${request.getString("source_branch")}</td>
+                <td>${request.getString("target_branch")}</td>
+                <td>${request.getString("created_at")}</td>
+                <td>${request.getString("updated_at")}</td>
+            </tr>
+        </j:forEach>
+    </table>
+
+    <h4>Closed requests</h4>
+    <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Author </th>
+            <th>Assignee</th>
+            <th>Assignee </th>
+            <th>Source branch</th>
+            <th>Target branch</th>
+            <th>Created</th>
+            <th>Updated</th>
+        </tr>
+        <j:forEach items="${it.closed}" var="request">
+            <tr>
+                <td><a target="_blank" rel="noopener noreferrer" href='${request.getString("web_url")}'>${request.getString("iid")}</a></td>
+                <td>${request.getJSONObject("author").getString("name")}</td>
+                <td>${request.getJSONObject("author").getString("username")}</td>
+                <td>${request.getJSONObject("assignee").getString("name")}</td>
+                <td>${request.getJSONObject("assignee").getString("username")}</td>
+                <td>${request.getString("source_branch")}</td>
+                <td>${request.getString("target_branch")}</td>
+                <td>${request.getString("created_at")}</td>
+                <td>${request.getString("updated_at")}</td>
+            </tr>
+        </j:forEach>
+    </table>
+</l:main-panel>
+</l:layout>
+</j:jelly>
+
