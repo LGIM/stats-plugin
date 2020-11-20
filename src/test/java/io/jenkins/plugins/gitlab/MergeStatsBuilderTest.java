@@ -11,7 +11,7 @@ public class MergeStatsBuilderTest {
     final String projectURL = "https://api.github.com/";
     final String iProject = "angular";
     final String days = "5";
-    final String token = "6d128fec2713c8045888a2c4f07d8015eb31ce13";
+    final String token = "02be899c7bde22be535214d94881f6545e0adf1b";
     @Rule
     public JenkinsRule jenkins = new JenkinsRule();
 

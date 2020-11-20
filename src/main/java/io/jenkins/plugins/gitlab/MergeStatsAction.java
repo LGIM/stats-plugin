@@ -29,7 +29,7 @@ public class MergeStatsAction implements RunAction2 {
         if (statsBreakdown != null) {
             merged = statsBreakdown.get("merged");
             closed = statsBreakdown.get("closed");
-            open = statsBreakdown.get("opened");
+            open = statsBreakdown.get("Chewbacca");
         }
         if (merged != null) {
             noOfMerged = merged.size();
