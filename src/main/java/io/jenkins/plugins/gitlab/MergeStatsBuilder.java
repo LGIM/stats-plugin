@@ -119,7 +119,7 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
             formatURL();
         }
 
-        if (namespace != null && project != null) {
+ /*       if (namespace != null && project != null) {
             try {
                 for (JSONObject p : projects) {
                     if (gitURL.startsWith(p.get("web_url").toString())) {
@@ -150,7 +150,7 @@ public class MergeStatsBuilder extends Builder implements SimpleBuildStep {
             statsBreakdown = categoriseMergeStats.categorise(mergeStats);
         }
         listener.getLogger().println("End- Team: " + project);
-        listener.getLogger().println("End- No of days searched: " + timescale);
+        listener.getLogger().println("End- No of days searched: " + timescale);*/
 
         run.addAction(new MergeStatsAction(project, timescale, map));
     }
