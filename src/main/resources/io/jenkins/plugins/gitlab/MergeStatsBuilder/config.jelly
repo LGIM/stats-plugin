@@ -3,6 +3,12 @@
     <f:entry title="${%GitURL}" field="gitURL">
         <f:textbox />
     </f:entry>
+    <f:entry title="${%GitOrg}" field="gitOrg">
+        <f:textbox />
+    </f:entry>
+    <f:entry title="${%GitTeam}" field="gitTeam">
+        <f:textbox />
+    </f:entry>
     <f:entry title="${%GitToken}" field="gitToken">
         <f:password />
     </f:entry>
